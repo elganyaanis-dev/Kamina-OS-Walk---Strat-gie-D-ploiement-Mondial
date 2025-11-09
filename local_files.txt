@@ -61,3 +61,4 @@
 /data/data/com.termux/files/home/kamina-os-walk/CHECKLIST_FINALE.md
 /data/data/com.termux/files/home/kamina-os-walk/MODULES_A_DEPLOYER.md
 /data/data/com.termux/files/home/kamina-os-walk/deploy-complete-infrastructure.sh
+/data/data/com.termux/files/home/kamina-os-walk/infrastructure-monitor.js

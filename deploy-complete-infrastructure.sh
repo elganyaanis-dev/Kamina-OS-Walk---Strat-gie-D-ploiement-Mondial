@@ -1,3 +1,4 @@
+head -n 20 deploy-complete-infrastructure.sh
 #!/bin/bash
 
 echo "🚀 DÉPLOIEMENT INFRASTRUCTURE COMPLÈTE KAMINA-OS"
@@ -5,8 +6,8 @@ echo "================================================"
 
 # Configuration
 KAMINA_OS_WALK_DIR="$HOME/kamina-os-walk"
-GITHUB_USER="VotreUsername"  # À modifier
-GITHUB_TOKEN="votre_token"   # À modifier
+GITHUB_USER="VotreVraiUsername"  # À modifier
+GITHUB_TOKEN="VotreVraiToken"   # À modifier
 
 echo "📁 Audit de la structure locale..."
 find $KAMINA_OS_WALK_DIR -type f -name "*.sh" -o -name "*.js" -o -name "*.json" -o -name "*.md" -o -name "*.html" -o -name "*.css" > local_files.txt
