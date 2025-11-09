@@ -34,6 +34,7 @@
 │   ├── feedbacks.json
 │   └── start-collector.js
 ├── fichiers-existants.txt
+├── infrastructure-monitor.js
 ├── local_files.txt
 ├── netlify.toml
 ├── package.json
@@ -89,4 +90,4 @@
     ├── system-health.js
     └── wallet.html
 
-16 directories, 74 files
+16 directories, 75 files
