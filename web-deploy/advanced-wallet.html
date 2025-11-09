@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💰 Wallet KAMINA-OS - Portefeuille Avancé</title>
+    <style>
+        :root {
+            --primary: #00ff41;
+            --secondary: #667eea;
+            --accent: #ffd700;
+            --success: #00b09b;
+            --warning: #ffa500;
+            --danger: #ff6b6b;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            font-family: 'Courier New', monospace;
+            min-height: 100vh;
+        }
+        
+        .wallet-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .wallet-header {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            margin-bottom: 30px;
+            border: 2px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .wallet-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.1), transparent);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .wallet-title {
+            font-size: 3rem;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        
+        /* Balance et statistiques */
+        .balance-section {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .main-balance {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 20px;
+            border: 2px solid var(--primary);
+            text-align: center;
+        }
+        
+        .balance-amount {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 20px 0;
+            text-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+        }
+        
+        .balance-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 255, 65, 0.3);
+            text-align: center;
+        }
+        
+        /* Navigation wallet */
+        .wallet-nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .nav-btn.active {
+            background: var(--primary);
+            color: black;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 255, 65, 0.3);
+        }
+        
+        .nav-btn:hover:not(.active) {
+            border-color: var(--primary);
+            transform: translateY(-1px);
+        }
+        
+        /* Sections de contenu */
+        .wallet-content {
+            display: none;
+        }
+        
+        .wallet-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Transactions */
+        .transactions-list {
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        
+        .transaction-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 15px;
+            border-left: 4px solid;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .transaction-item:hover {
+            transform: translateX(5px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .transaction-item.sent { border-left-color: var(--danger); }
+        .transaction-item.received { border-left-color: var(--success); }
+        .transaction-item.pending { border-left-color: var(--warning); }
+        
+        /* Formulaire d'envoi */
+        .send-form {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 20px;
+            border: 2px solid var(--primary);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid rgba(0, 255, 65, 0.3);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-family: 'Courier New', monospace;
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+        }
+        
+        /* Staking */
+        .staking-interface {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 20px;
+            border: 2px solid var(--accent);
+        }
+        
+        .apy-display {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--accent);
+            margin: 20px 0;
+        }
+        
+        /* QR Code */
+        .qr-section {
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .qr-code {
+            width: 200px;
+            height: 200px;
+            background: white;
+            margin: 20px auto;
+            border: 5px solid var(--primary);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .balance-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .wallet-nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-btn {
+                width: 250px;
+                justify-content: center;
+            }
+            
+            .balance-amount {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wallet-container">
+        <!-- En-tête du wallet -->
+        <div class="wallet-header">
+            <h1 class="wallet-title">💰 KAMINA WALLET</h1>
+            <p>Portefeuille sécurisé KMN - Gestion avancée d'actifs</p>
+            <div class="user-info" id="userInfo"></div>
+        </div>
+
+        <!-- Balance principale -->
+        <div class="balance-section">
+            <div class="main-balance">
+                <h3>SOLDE KMN</h3>
+                <div class="balance-amount" id="mainBalance">0.00 KMN</div>
+                <div class="balance-equivalent" id="balanceEquivalent">≈ $0.00 USD</div>
+            </div>
+            
+            <div class="balance-stats">
+                <div class="stat-card">
+                    <div class="stat-label">Staké</div>
+                    <div class="stat-value" id="stakedAmount">0 KMN</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Récompenses</div>
+                    <div class="stat-value" id="rewardsAmount">0 KMN</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">APY Actuel</div>
+                    <div class="stat-value" id="currentAPY">15%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Transactions</div>
+                    <div class="stat-value" id="txCount">0</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="wallet-nav">
+            <a href="#" class="nav-btn active" data-tab="overview">
+                📊 Aperçu
+            </a>
+            <a href="#" class="nav-btn" data-tab="send">
+                📤 Envoyer
+            </a>
+            <a href="#" class="nav-btn" data-tab="receive">
+                📥 Recevoir
+            </a>
+            <a href="#" class="nav-btn" data-tab="staking">
+                🎯 Staking
+            </a>
+            <a href="#" class="nav-btn" data-tab="transactions">
+                🔄 Transactions
+            </a>
+            <a href="#" class="nav-btn" data-tab="nft">
+                🖼️ NFT Gallery
+            </a>
+            <a href="#" class="nav-btn" data-tab="swap">
+                🔄 Swap
+            </a>
+            <a href="#" class="nav-btn" data-tab="security">
+                🛡️ Sécurité
+            </a>
+        </div>
+
+        <!-- Contenu des sections -->
+        <div id="overview" class="wallet-content active">
+            <h2>📊 Aperçu du Portefeuille</h2>
+            <div class="quick-actions">
+                <button class="action-btn" onclick="showTab('send')">
+                    <span>📤</span> Envoyer
+                </button>
+                <button class="action-btn" onclick="showTab('receive')">
+                    <span>📥</span> Recevoir
+                </button>
+                <button class="action-btn" onclick="showTab('staking')">
+                    <span>🎯</span> Staker
+                </button>
+                <button class="action-btn" onclick="quickBuy()">
+                    <span>🛒</span> Acheter
+                </button>
+            </div>
+            
+            <div class="portfolio-chart" id="portfolioChart">
+                <!-- Graphique portfolio -->
+                <div style="text-align: center; padding: 50px;">
+                    <div style="font-size: 3rem;">📈</div>
+                    <p>Graphique de performance en temps réel</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Envoyer des fonds -->
+        <div id="send" class="wallet-content">
+            <h2>📤 Envoyer des KMN</h2>
+            <div class="send-form">
+                <div class="form-group">
+                    <label class="form-label">Adresse du destinataire</label>
+                    <input type="text" class="form-input" id="recipientAddress" 
+                           placeholder="KMN_1A2b3C4d5E6f7G8h9I0j">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Montant (KMN)</label>
+                    <input type="number" class="form-input" id="sendAmount" 
+                           placeholder="0.00" step="0.001" min="0.001">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Frais de réseau</label>
+                    <select class="form-input" id="networkFee">
+                        <option value="slow">Lent (0.001 KMN)</option>
+                        <option value="normal" selected>Normal (0.002 KMN)</option>
+                        <option value="fast">Rapide (0.005 KMN)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Message (optionnel)</label>
+                    <textarea class="form-input" id="sendMessage" 
+                              placeholder="Message accompagnant la transaction"></textarea>
+                </div>
+                
+                <button class="send-btn" onclick="sendTransaction()">
+                    🚀 Confirmer l'envoi
+                </button>
+            </div>
+        </div>
+
+        <!-- Recevoir des fonds -->
+        <div id="receive" class="wallet-content">
+            <h2>📥 Recevoir des KMN</h2>
+            <div class="qr-section">
+                <div class="qr-code" id="qrCode">
+                    📱
+                </div>
+                <div class="address-display">
+                    <h3>Votre adresse KMN</h3>
+                    <div class="address-value" id="walletAddress">KMN_Chargement...</div>
+                    <button class="copy-btn" onclick="copyAddress()">
+                        📋 Copier l'adresse
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Staking -->
+        <div id="staking" class="wallet-content">
+            <h2>🎯 Staking KMN</h2>
+            <div class="staking-interface">
+                <div class="apy-display">
+                    APY: <span id="stakingAPY">15%</span>
+                </div>
+                
+                <div class="staking-form">
+                    <div class="form-group">
+                        <label class="form-label">Montant à staker (KMN)</label>
+                        <input type="number" class="form-input" id="stakeAmount" 
+                               placeholder="0.00" step="0.001" min="100">
+                        <small>Minimum: 100 KMN</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Période de staking</label>
+                        <select class="form-input" id="stakingPeriod">
+                            <option value="30">30 jours</option>
+                            <option value="60">60 jours</option>
+                            <option value="90" selected>90 jours</option>
+                            <option value="180">180 jours</option>
+                        </select>
+                    </div>
+                    
+                    <div class="staking-preview">
+                        <h4>Prévision des gains:</h4>
+                        <div id="stakingPreview">Calcul en cours...</div>
+                    </div>
+                    
+                    <button class="stake-btn" onclick="stakeTokens()">
+                        🎯 Confirmer le Staking
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Transactions -->
+        <div id="transactions" class="wallet-content">
+            <h2>🔄 Historique des Transactions</h2>
+            <div class="transactions-list" id="transactionsHistory">
+                <!-- Transactions chargées dynamiquement -->
+            </div>
+        </div>
+
+        <!-- Sécurité -->
+        <div id="security" class="wallet-content">
+            <h2>🛡️ Sécurité du Portefeuille</h2>
+            <div class="security-features">
+                <div class="security-item">
+                    <h3>🔐 Phrase de récupération</h3>
+                    <button class="security-btn" onclick="showRecoveryPhrase()">
+                        Afficher la phrase
+                    </button>
+                </div>
+                
+                <div class="security-item">
+                    <h3>🔑 Clé privée</h3>
+                    <button class="security-btn warning" onclick="showPrivateKey()">
+                        Afficher la clé
+                    </button>
+                </div>
+                
+                <div class="security-item">
+                    <h3>📧 Alertes de sécurité</h3>
+                    <label class="switch">
+                        <input type="checkbox" id="securityAlerts" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==================== GESTIONNAIRE DE WALLET ====================
+        class AdvancedWallet {
+            constructor() {
+                this.balance = 0;
+                this.staked = 0;
+                this.rewards = 0;
+                this.transactions = [];
+                this.walletAddress = '';
+                this.kmnPrice = 0.15; // Prix en USD
+                this.init();
+            }
+
+            init() {
+                this.loadWalletData();
+                this.generateWalletAddress();
+                this.updateUI();
+                this.startPriceUpdates();
+                this.loadTransactionHistory();
+            }
+
+            loadWalletData() {
+                const saved = localStorage.getItem('kamina_wallet');
+                if (saved) {
+                    const data = JSON.parse(saved);
+                    this.balance = data.balance || 1000; // Balance démo
+                    this.staked = data.staked || 0;
+                    this.rewards = data.rewards || 0;
+                    this.transactions = data.transactions || [];
+                } else {
+                    // Données de démonstration
+                    this.balance = 1000;
+                    this.createDemoTransactions();
+                }
+            }
+
+            generateWalletAddress() {
+                const user = JSON.parse(localStorage.getItem('kaminaUser'));
+                if (user && user.wallet) {
+                    this.walletAddress = user.wallet.address;
+                } else {
+                    this.walletAddress = 'KMN_' + Math.random().toString(36).substr(2, 9).toUpperCase() + 
+                                        Math.random().toString(36).substr(2, 9).toUpperCase();
+                }
+            }
+
+            createDemoTransactions() {
+                this.transactions = [
+                    {
+                        id: 'tx1',
+                        type: 'received',
+                        amount: 1000,
+                        from: 'network',
+                        to: this.walletAddress,
+                        timestamp: Date.now() - 86400000,
+                        status: 'confirmed',
+                        hash: '0x123...abc'
+                    },
+                    {
+                        id: 'tx2', 
+                        type: 'sent',
+                        amount: 50,
+                        from: this.walletAddress,
+                        to: 'KMN_USER2',
+                        timestamp: Date.now() - 43200000,
+                        status: 'confirmed',
+                        hash: '0x456...def'
+                    }
+                ];
+                this.saveWalletData();
+            }
+
+            // 📤 ENVOYER DES FONDS
+            sendTransaction(recipient, amount, fee = 'normal') {
+                if (amount <= 0) {
+                    throw new Error('Montant invalide');
+                }
+
+                if (amount > this.balance) {
+                    throw new Error('Solde insuffisant');
+                }
+
+                const feeAmount = this.calculateFee(fee);
+                const totalAmount = amount + feeAmount;
+
+                if (totalAmount > this.balance) {
+                    throw new Error(`Solde insuffisant (frais inclus: ${feeAmount} KMN)`);
+                }
+
+                // Créer la transaction
+                const transaction = {
+                    id: 'tx_' + Date.now(),
+                    type: 'sent',
+                    amount: amount,
+                    fee: feeAmount,
+                    from: this.walletAddress,
+                    to: recipient,
+                    timestamp: Date.now(),
+                    status: 'pending',
+                    hash: '0x' + Math.random().toString(16).substr(2, 64)
+                };
+
+                this.balance -= totalAmount;
+                this.transactions.unshift(transaction);
+                this.saveWalletData();
+
+                // Simuler la confirmation
+                setTimeout(() => {
+                    transaction.status = 'confirmed';
+                    this.saveWalletData();
+                    this.updateUI();
+                    this.showNotification(`✅ Transaction confirmée! ${amount} KMN envoyés`);
+                }, 3000);
+
+                return transaction;
+            }
+
+            // 🎯 STAKING
+            stakeTokens(amount, period = 90) {
+                if (amount < 100) {
+                    throw new Error('Minimum de staking: 100 KMN');
+                }
+
+                if (amount > this.balance) {
+                    throw new Error('Solde insuffisant');
+                }
+
+                this.balance -= amount;
+                this.staked += amount;
+
+                const stakingRecord = {
+                    amount: amount,
+                    period: period,
+                    startTime: Date.now(),
+                    apy: 15,
+                    estimatedRewards: this.calculateStakingRewards(amount, period)
+                };
+
+                this.saveWalletData();
+                this.updateUI();
+
+                return stakingRecord;
+            }
+
+            calculateStakingRewards(amount, period) {
+                const dailyRate = 15 / 365 / 100; // 15% APY
+                return amount * dailyRate * period;
+            }
+
+            // 🔧 MÉTHODES UTILITAIRES
+            calculateFee(feeType) {
+                const fees = {
+                    slow: 0.001,
+                    normal: 0.002,
+                    fast: 0.005
+                };
+                return fees[feeType] || 0.002;
+            }
+
+            saveWalletData() {
+                const data = {
+                    balance: this.balance,
+                    staked: this.staked,
+                    rewards: this.rewards,
+                    transactions: this.transactions,
+                    address: this.walletAddress
+                };
+                localStorage.setItem('kamina_wallet', JSON.stringify(data));
+            }
+
+            startPriceUpdates() {
+                // Simulation de mises à jour de prix
+                setInterval(() => {
+                    this.kmnPrice = 0.15 + (Math.random() * 0.02 - 0.01);
+                    this.updateUI();
+                }, 30000);
+            }
+
+            loadTransactionHistory() {
+                // Charger l'historique depuis la blockchain
+                this.updateTransactionsUI();
+            }
+
+            // 🎨 MISE À JOUR INTERFACE
+            updateUI() {
+                this.updateBalance();
+                this.updateStats();
+                this.updateTransactionsUI();
+            }
+
+            updateBalance() {
+                document.getElementById('mainBalance').textContent = 
+                    this.balance.toFixed(2) + ' KMN';
+                
+                const usdValue = (this.balance * this.kmnPrice).toFixed(2);
+                document.getElementById('balanceEquivalent').textContent = 
+                    '≈ $' + usdValue + ' USD';
+            }
+
+            updateStats() {
+                document.getElementById('stakedAmount').textContent = 
+                    this.staked.toFixed(2) + ' KMN';
+                document.getElementById('rewardsAmount').textContent = 
+                    this.rewards.toFixed(2) + ' KMN';
+                document.getElementById('txCount').textContent = 
+                    this.transactions.length;
+            }
+
+            updateTransactionsUI() {
+                const container = document.getElementById('transactionsHistory');
+                if (!container) return;
+
+                container.innerHTML = this.transactions.map(tx => `
+                    <div class="transaction-item ${tx.type} ${tx.status}">
+                        <div class="tx-header">
+                            <span class="tx-type">${tx.type === 'sent' ? '📤 Envoyé' : '📥 Reçu'}</span>
+                            <span class="tx-amount ${tx.type}">
+                                ${tx.type === 'sent' ? '-' : '+'}${tx.amount} KMN
+                            </span>
+                        </div>
+                        <div class="tx-details">
+                            <div>À: ${tx.to.substring(0, 12)}...</div>
+                            <div>Statut: <span class="status-${tx.status}">${tx.status}</span></div>
+                            <div>Date: ${new Date(tx.timestamp).toLocaleDateString()}</div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            showNotification(message, type = 'success') {
+                const notification = document.createElement('div');
+                notification.className = `wallet-notification ${type}`;
+                notification.textContent = message;
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    padding: 15px 20px;
+                    border-radius: 10px;
+                    color: white;
+                    z-index: 10000;
+                    background: ${type === 'success' ? '#00b09b' : '#ff6b6b'};
+                    animation: slideIn 0.3s ease;
+                `;
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.remove();
+                }, 5000);
+            }
+        }
+
+        // ==================== GESTION D'INTERFACE ====================
+        const wallet = new AdvancedWallet();
+
+        function showTab(tabName) {
+            // Masquer tous les onglets
+            document.querySelectorAll('.wallet-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Afficher l'onglet sélectionné
+            document.getElementById(tabName).classList.add('active');
+            document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+        }
+
+        function sendTransaction() {
+            const recipient = document.getElementById('recipientAddress').value;
+            const amount = parseFloat(document.getElementById('sendAmount').value);
+            const fee = document.getElementById('networkFee').value;
+            const message = document.getElementById('sendMessage').value;
+            
+            if (!recipient || !amount) {
+                wallet.showNotification('❌ Veuillez remplir tous les champs', 'error');
+                return;
+            }
+            
+            try {
+                const tx = wallet.sendTransaction(recipient, amount, fee);
+                wallet.showNotification(`🔄 Transaction en cours... ${amount} KMN`);
+                
+                // Réinitialiser le formulaire
+                document.getElementById('sendAmount').value = '';
+                document.getElementById('sendMessage').value = '';
+                
+            } catch (error) {
+                wallet.showNotification(`❌ ${error.message}`, 'error');
+            }
+        }
+
+        function stakeTokens() {
+            const amount = parseFloat(document.getElementById('stakeAmount').value);
+            const period = parseInt(document.getElementById('stakingPeriod').value);
+            
+            if (!amount || amount < 100) {
+                wallet.showNotification('❌ Montant minimum: 100 KMN', 'error');
+                return;
+            }
+            
+            try {
+                const staking = wallet.stakeTokens(amount, period);
+                wallet.showNotification(`🎯 ${amount} KMN stakés pour ${period} jours!`);
+                document.getElementById('stakeAmount').value = '';
+            } catch (error) {
+                wallet.showNotification(`❌ ${error.message}`, 'error');
+            }
+        }
+
+        function copyAddress() {
+            navigator.clipboard.writeText(wallet.walletAddress).then(() => {
+                wallet.showNotification('📋 Adresse copiée!');
+            });
+        }
+
+        function quickBuy() {
+            const amount = prompt('Combien de KMN voulez-vous acheter?', '100');
+            if (amount) {
+                wallet.showNotification(`🛒 Achat de ${amount} KMN en cours...`);
+                // Intégration avec un exchange ici
+            }
+        }
+
+        function showRecoveryPhrase() {
+            const phrase = "kamina blockchain secure phrase demo only not real";
+            alert(`🔐 Votre phrase de récupération:\n\n${phrase}\n\n⚠️ Gardez cette phrase en sécurité!`);
+        }
+
+        function showPrivateKey() {
+            if (confirm('⚠️ AFFICHER LA CLÉ PRIVÉE\n\nNe partagez jamais votre clé privée!')) {
+                const privateKey = "0x" + Math.random().toString(16).substr(2, 64);
+                alert(`🔑 Votre clé privée:\n\n${privateKey}\n\n🚨 EXTREME DANGER: Ne partagez jamais cette clé!`);
+            }
+        }
+
+        // Événements de navigation
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const tabName = e.target.closest('.nav-btn').dataset.tab;
+                showTab(tabName);
+            });
+        });
+
+        // Mise à jour de l'adresse
+        document.getElementById('walletAddress').textContent = wallet.walletAddress;
+
+        // CSS additionnel
+        const walletStyles = `
+        <style>
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin: 25px 0;
+        }
+        
+        .action-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(0, 255, 65, 0.3);
+            color: white;
+            padding: 20px 15px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Courier New', monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .action-btn:hover {
+            background: rgba(0, 255, 65, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .action-btn span {
+            font-size: 1.5rem;
+        }
+        
+        .send-btn, .stake-btn {
+            background: #00ff41;
+            color: black;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .send-btn:hover, .stake-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 255, 65, 0.3);
+        }
+        
+        .copy-btn {
+            background: transparent;
+            color: #00ff41;
+            border: 2px solid #00ff41;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            background: #00ff41;
+            color: black;
+        }
+        
+        .security-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .security-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 255, 65, 0.3);
+        }
+        
+        .security-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(0, 255, 65, 0.3);
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .security-btn.warning {
+            border-color: #ff6b6b;
+            color: #ff6b6b;
+        }
+        
+        .security-btn:hover {
+            background: rgba(0, 255, 65, 0.2);
+        }
+        
+        .security-btn.warning:hover {
+            background: rgba(255, 107, 107, 0.2);
+        }
+        
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+            margin-top: 10px;
+        }
+        
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: #00ff41;
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        
+        .tx-amount.sent { color: #ff6b6b; }
+        .tx-amount.received { color: #00b09b; }
+        
+        .status-confirmed { color: #00b09b; }
+        .status-pending { color: #ffa500; }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        </style>
+        `;
+        
+        document.head.insertAdjacentHTML('beforeend', walletStyles);
+    </script>
+</body>
+</html>
