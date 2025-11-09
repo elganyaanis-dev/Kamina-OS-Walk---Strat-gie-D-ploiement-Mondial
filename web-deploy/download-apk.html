@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📱 Télécharger KAMINA-OS APK</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            font-family: 'Courier New', monospace;
+            min-height: 100vh;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .download-container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid #00ff41;
+        }
+        
+        .apk-icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+        }
+        
+        .download-btn {
+            background: linear-gradient(45deg, #00ff41, #009900);
+            color: black;
+            padding: 20px 40px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: inline-block;
+            margin: 20px 0;
+            transition: transform 0.3s ease;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 255, 65, 0.4);
+        }
+        
+        .steps {
+            text-align: left;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+        
+        .step {
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .back-link {
+            margin-top: 30px;
+        }
+        
+        .back-link a {
+            color: #00ff41;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="download-container">
+        <div class="apk-icon">📱</div>
+        <h1>KAMINA-OS APK</h1>
+        <p>Application Android Officielle</p>
+        
+        <div class="download-btn" onclick="downloadAPK()">
+            📥 TÉLÉCHARGER L'APK
+        </div>
+        
+        <div class="steps">
+            <h3>📋 INSTRUCTIONS D'INSTALLATION :</h3>
+            <div class="step">
+                <span>1️⃣</span>
+                <span>Télécharger l'APK ci-dessus</span>
+            </div>
+            <div class="step">
+                <span>2️⃣</span>
+                <span>Autoriser "Sources inconnues" dans Paramètres → Sécurité</span>
+            </div>
+            <div class="step">
+                <span>3️⃣</span>
+                <span>Installer l'application</span>
+            </div>
+            <div class="step">
+                <span>4️⃣</span>
+                <span>Lancer KAMINA-OS !</span>
+            </div>
+        </div>
+        
+        <div class="app-info">
+            <h3>📊 INFORMATIONS APPLICATION :</h3>
+            <p><strong>Version :</strong> 1.0.0</p>
+            <p><strong>Taille :</strong> ~15 MB</p>
+            <p><strong>Android :</strong> 8.0+</p>
+            <p><strong>Contenu :</strong> Écosystème Complet KAMINA-OS</p>
+        </div>
+        
+        <div class="back-link">
+            <a href="ecosystem.html">← Retour à l'Écosystème</a>
+        </div>
+    </div>
+
+    <script>
+        function downloadAPK() {
+            // Lien temporaire - à remplacer par le vrai lien Google Drive
+            const apkUrl = "https://drive.google.com/your-apk-link-here";
+            
+            alert("📱 APK KAMINA-OS\n\n⚠️  Lien Google Drive à configurer :\n" + apkUrl + "\n\n📋 Suivez le guide dans le repository GitHub");
+            
+            // Ouvrir le guide APK
+            window.open("https://github.com/elganyaanis-dev/Kamina-OS-Walk/blob/main/APK_GUIDE.md", "_blank");
+        }
+    </script>
+</body>
+</html>
