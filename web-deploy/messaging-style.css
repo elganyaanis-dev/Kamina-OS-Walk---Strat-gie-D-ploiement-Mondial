@@ -1,0 +1,97 @@
+/* 💬 STYLES MESSAGERIE TEMPS RÉEL */
+.chat-container {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #00ff41;
+}
+
+.chat-messages {
+    height: 300px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+}
+
+.message {
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 80%;
+}
+
+.message.own {
+    background: rgba(0, 255, 65, 0.2);
+    margin-left: auto;
+    border: 1px solid #00ff41;
+}
+
+.message.other {
+    background: rgba(102, 126, 234, 0.2);
+    margin-right: auto;
+    border: 1px solid #667eea;
+}
+
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    margin-bottom: 5px;
+    opacity: 0.8;
+}
+
+.message-content {
+    word-wrap: break-word;
+}
+
+.message-status {
+    text-align: right;
+    font-size: 0.7rem;
+    opacity: 0.7;
+    margin-top: 5px;
+}
+
+.system-message {
+    color: #ffd700;
+    text-align: center;
+    font-style: italic;
+}
+
+.transaction-message {
+    color: #00ff41;
+    font-weight: bold;
+}
+
+.alert-message {
+    color: #ff6b6b;
+    font-weight: bold;
+}
+
+.chat-input-container {
+    display: flex;
+    gap: 10px;
+}
+
+.chat-input {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #00ff41;
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-family: 'Courier New', monospace;
+}
+
+.chat-send-btn {
+    background: #00ff41;
+    color: black;
+    border: none;
+    border-radius: 25px;
+    padding: 12px 25px;
+    cursor: pointer;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+}
