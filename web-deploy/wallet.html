@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>💰 KAMINA WALLET</title>
+    <style>
+        body { background: #1a1a2e; color: #00ff41; font-family: monospace; padding: 20px; }
+        .wallet-container { max-width: 600px; margin: 0 auto; background: #000; padding: 30px; border: 2px solid #00ff41; }
+        .balance { font-size: 2em; text-align: center; margin: 20px 0; }
+        .address { background: #111; padding: 15px; border-radius: 5px; margin: 10px 0; }
+        .btn { background: #00ff41; color: #000; padding: 10px 20px; border: none; margin: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="wallet-container">
+        <h1>💰 KAMINA WALLET</h1>
+        <div class="balance">1,000.00 <strong>KMN</strong></div>
+        <div class="address">Adresse: KMN_1A2b3C4d5E6f7G8h9I0j</div>
+        <button class="btn" onclick="sendTransaction()">📤 Envoyer</button>
+        <button class="btn" onclick="receiveTokens()">📥 Recevoir</button>
+        <button class="btn" onclick="stakeTokens()">🎯 Staker</button>
+    </div>
+    <script>
+        function sendTransaction() { alert("🚀 Transaction préparée!\nMontant: 100 KMN\nFrais: 0.001 KMN"); }
+        function receiveTokens() { alert("📥 Adresse de réception:\nKMN_1A2b3C4d5E6f7G8h9I0j"); }
+        function stakeTokens() { alert("🎯 Staking activé!\nAPY: 15%\nDurée: 90 jours"); }
+    </script>
+</body>
+</html>
