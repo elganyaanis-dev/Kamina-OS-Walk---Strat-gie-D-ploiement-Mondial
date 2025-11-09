@@ -1,0 +1,10 @@
+📋 CONFIGURATION ANDROID STUDIO :
+
+1. OUVIR Android Studio
+2. SELECTIONNER "Open Existing Project"
+3. NAVIGUER vers : /sdcard/kamina-os-walk/android-deploy/apk-build/
+4. ATTENDRE la synchronisation Gradle
+5. CONFIGURER SDK Android 33+
+6. BUILD → Generate Signed Bundle/APK
+
+✅ URL APPLICATION: https://silly-kringle-6a0a28.netlify.app/ecosystem-functional.html
