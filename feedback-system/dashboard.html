@@ -37,4 +37,35 @@
                     <h3>Total Feedbacks</h3>
                     <div style="font-size: 2em;">${stats.total}</div>
                 </div>
-                <div class="
+                <div class="stat-card">
+                    <h3>Note Moyenne</h3>
+                    <div style="font-size: 2em;">${stats.averageRating}/5</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Dernier Feedback</h3>
+                    <div>${sampleFeedbacks[0]?.date || 'Aucun'}</div>
+                </div>
+            `;
+        }
+
+        function displayFeedbacks() {
+            const container = document.getElementById('feedbacks');
+            container.innerHTML = '<h2>Derniers Feedbacks</h2>';
+            
+            sampleFeedbacks.forEach(fb => {
+                container.innerHTML += `
+                    <div class="feedback-item">
+                        <strong>${fb.name || 'Anonyme'}</strong>
+                        <span class="rating">${'⭐'.repeat(fb.rating)}</span>
+                        <p>${fb.message}</p>
+                        <small>${fb.date} - ${fb.experience}</small>
+                    </div>
+                `;
+            });
+        }
+
+        displayStats();
+        displayFeedbacks();
+    </script>
+</body>
+</html>
