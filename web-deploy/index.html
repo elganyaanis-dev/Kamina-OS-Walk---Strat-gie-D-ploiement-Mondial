@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KAMINA-OS 🌟 - Système Ultime</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 800px;
+            width: 90%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #ffd700, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        .status {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .feature {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">🚀</div>
+            <h1>KAMINA-OS</h1>
+            <div class="subtitle">Système Ultime - Déployé par KAMINA-OS-WALK</div>
+        </div>
+        
+        <div class="status" id="status">
+            ⏳ Initialisation du système...
+        </div>
+        
+        <div class="features">
+            <div class="feature">
+                <div>🔒</div>
+                <h3>Sécurisé</h3>
+                <p>Système autonome protégé</p>
+            </div>
+            <div class="feature">
+                <div>⚡</div>
+                <h3>Rapide</h3>
+                <p>Performance optimisée</p>
+            </div>
+            <div class="feature">
+                <div>🌍</div>
+                <h3>Global</h3>
+                <p>Accessible mondialement</p>
+            </div>
+            <div class="feature">
+                <div>🔧</div>
+                <h3>Modulaire</h3>
+                <p>Architecture flexible</p>
+            </div>
+        </div>
+        
+        <div class="developer">
+            <h3>👑 Développeur</h3>
+            <p>Chabbi Mohammed Anis</p>
+            <p><em>"Transformer la vision en réalité"</em></p>
+        </div>
+        
+        <div class="links">
+            <a href="https://github.com/elganyaanis-dev/Kamina-OS-Walk" class="btn" target="_blank">💻 Code Source</a>
+            <a href="#" class="btn" id="apkLink">📱 Télécharger APK</a>
+            <a href="#" class="btn" id="docsLink">📚 Documentation</a>
+        </div>
+        
+        <div class="footer">
+            <p>KAMINA-OS v2.0.0 - Déployé avec ❤️ via KAMINA-OS-WALK</p>
+            <p id="uptime">Uptime: 0 secondes</p>
+        </div>
+    </div>
+
+    <script>
+        class KaminaOSWeb {
+            constructor() {
+                this.startTime = new Date();
+                this.init();
+            }
+            
+            init() {
+                console.log("🌟 KAMINA-OS Web Version Activated");
+                this.updateStatus();
+                this.startUptimeCounter();
+                this.setupLinks();
+            }
+            
+            updateStatus() {
+                const status = document.getElementById('status');
+                status.innerHTML = '🟢 SYSTÈME ACTIF - Toutes les fonctionnalités opérationnelles';
+                status.style.background = 'linear-gradient(45deg, #00b09b, #96c93d)';
+            }
+            
+            startUptimeCounter() {
+                setInterval(() => {
+                    const uptime = Math.floor((new Date() - this.startTime) / 1000);
+                    document.getElementById('uptime').textContent = `Uptime: ${uptime} secondes`;
+                }, 1000);
+            }
+            
+            setupLinks() {
+                // Lien APK (à remplacer par le vrai lien Google Drive plus tard)
+                document.getElementById('apkLink').href = "https://drive.google.com/your-apk-link-here";
+                
+                // Lien documentation
+                document.getElementById('docsLink').href = "https://github.com/elganyaanis-dev/Kamina-OS-Walk#readme";
+            }
+        }
+        
+        // Démarrer le système
+        new KaminaOSWeb();
+    </script>
+</body>
+</html>
