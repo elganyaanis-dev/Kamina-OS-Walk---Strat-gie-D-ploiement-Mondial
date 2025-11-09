@@ -1,0 +1,92 @@
+.
+├── CHECKLIST_FINALE.md
+├── DEPLOYMENT_GRATUIT.md
+├── DEPLOYMENT_LINKS.json
+├── DEPLOY_TEST.md
+├── GUIDE_FEEDBACKS.md
+├── LICENSE
+├── MODULES_A_DEPLOYER.md
+├── README.md
+├── SOCIAL_DEPLOYMENT.md
+├── android-deploy
+│   ├── APK_GUIDE.md
+│   ├── README.md
+│   ├── android-studio-setup.txt
+│   ├── auto-build-apk.sh
+│   ├── build-android-apk.sh
+│   ├── build-apk.sh
+│   └── kamina-apk
+│       ├── AndroidManifest.xml
+│       └── app
+├── arbre-composants.txt
+├── architecture-rapport.txt
+├── config.json
+├── deploy-complete-infrastructure.sh
+├── deploy-to-reality.js
+├── deploy_watch.js
+├── docs
+│   ├── DEPLOYMENT_GUIDE.md
+│   ├── STRATEGY.md
+│   └── index.html
+├── feedback-system
+│   ├── collector.js
+│   ├── dashboard.html
+│   ├── feedbacks.json
+│   └── start-collector.js
+├── fichiers-existants.txt
+├── local_files.txt
+├── netlify.toml
+├── package.json
+├── project_structure.txt
+├── scripts
+│   ├── build-apk.sh
+│   ├── deploy-android.sh
+│   ├── deploy-gratuit.js
+│   ├── deploy-web.sh
+│   ├── execute-real-deployment.js
+│   ├── setup-real-accounts.sh
+│   └── verify-reality.js
+├── src
+│   ├── analytics
+│   ├── automation
+│   ├── cloud-scaling.js
+│   ├── core
+│   ├── deployment-orchestrator.js
+│   ├── kamina-integration.js
+│   ├── main.js
+│   ├── modules
+│   ├── strategies
+│   │   └── existing-system-leverage.js
+│   └── utils
+├── tests
+│   └── test.js
+└── web-deploy
+    ├── GUIDE_DISTRIBUTION.md
+    ├── admin-dashboard.html
+    ├── advanced-auth-system.js
+    ├── advanced-wallet.html
+    ├── ai-dashboard.html
+    ├── auth-system.js
+    ├── blockchain.html
+    ├── coordination-system.js
+    ├── deploy-to-netlify.sh
+    ├── download-apk.html
+    ├── ecosystem-functional.html
+    ├── ecosystem-style.css
+    ├── ecosystem.html
+    ├── feedback.html
+    ├── index.html
+    ├── info.html
+    ├── kamina-blockchain.js
+    ├── kamina-os-main.html
+    ├── links-check.txt
+    ├── messaging-style.css
+    ├── netlify.toml
+    ├── protocols.md
+    ├── realtime-messaging.js
+    ├── security-panel.html
+    ├── surveillance-system.html
+    ├── system-health.js
+    └── wallet.html
+
+16 directories, 74 files
