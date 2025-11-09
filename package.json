@@ -1,0 +1,16 @@
+{
+  "name": "kamina-os-walk",
+  "version": "1.0.0",
+  "description": "Stratégie Déploiement Mondial - Système Accéléré avec DeepBridge",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "node src/main.js",
+    "dev": "node deploy_watch.js",
+    "deploy": "git add . && git commit -m 'Auto-deploy' && git push origin main",
+    "test": "node tests/test.js",
+    "watch": "node deploy_watch.js"
+  },
+  "keywords": ["kamina", "deployment", "strategy", "global", "automation", "deepbridge"],
+  "author": "Chabbi Mohammed Anis",
+  "license": "MIT"
+}
