@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KAMINA-OS 🌟 - Système Ultime</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            font-family: 'Courier New', monospace;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .terminal {
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            padding: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+            border: 1px solid #00ff41;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #00ff41;
+            padding-bottom: 20px;
+        }
+        
+        .logo {
+            font-size: 4rem;
+            margin-bottom: 10px;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            color: #00ff41;
+            text-shadow: 0 0 10px #00ff41;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+        
+        .system-info {
+            background: rgba(0, 255, 65, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #00ff41;
+        }
+        
+        .modules {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .module {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 255, 65, 0.3);
+        }
+        
+        .module h3 {
+            color: #00ff41;
+            margin-bottom: 10px;
+        }
+        
+        .status {
+            background: rgba(0, 255, 65, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        
+        .links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #00ff41, #009900);
+            color: black;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 255, 65, 0.4);
+        }
+        
+        .console {
+            background: #000;
+            color: #00ff41;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            height: 200px;
+            overflow-y: auto;
+            border: 1px solid #00ff41;
+        }
+    </style>
+</head>
+<body>
+    <div class="terminal">
+        <div class="header">
+            <div class="logo">🌌</div>
+            <h1>KAMINA-OS</h1>
+            <div class="subtitle">SYSTÈME ULTIME - VERSION PRINCIPALE</div>
+        </div>
+        
+        <div class="system-info">
+            <h3>📊 STATUT SYSTÈME</h3>
+            <p>🟢 SYSTÈME PRINCIPAL ACTIVÉ</p>
+            <p>👑 DÉVELOPPEUR: CHABBI MOHAMMED ANIS</p>
+            <p>🚀 VERSION: ULTIME 3.0</p>
+        </div>
+        
+        <div class="console" id="console">
+            <div>> Initialisation du système KAMINA-OS...</div>
+            <div>> Chargement des modules principaux...</div>
+            <div>> Système autonome: ACTIVÉ</div>
+            <div>> Communication temps réel: PRÊT</div>
+            <div>> Interface utilisateur: CHARGÉE</div>
+            <div>> ✅ KAMINA-OS OPÉRATIONNEL</div>
+        </div>
+        
+        <div class="modules">
+            <div class="module">
+                <h3>🤖 SYSTÈME AUTONOME</h3>
+                <p>Fonctionnement indépendant avec prise de décision intelligente</p>
+            </div>
+            <div class="module">
+                <h3>🔗 COMMUNICATION TEMPS RÉEL</h3>
+                <p>Échange de données instantané entre composants</p>
+            </div>
+            <div class="module">
+                <h3>🧠 INTELLIGENCE ARTIFICIELLE</h3>
+                <p>Analyse et adaptation en temps réel</p>
+            </div>
+            <div class="module">
+                <h3>🌍 DÉPLOIEMENT GLOBAL</h3>
+                <p>Accessibilité mondiale via KAMINA-OS-WALK</p>
+            </div>
+        </div>
+        
+        <div class="status" id="liveStatus">
+            🔴 CONNEXION EN COURS...
+        </div>
+        
+        <div class="links">
+            <a href="index.html" class="btn">🏠 KAMINA-OS-WALK</a>
+            <a href="feedback.html" class="btn">💬 FEEDBACK</a>
+            <a href="info.html" class="btn">📚 À PROPOS</a>
+            <a href="https://github.com/elganyaanis-dev/Kamina-OS-Walk" class="btn" target="_blank">💻 CODE SOURCE</a>
+        </div>
+    </div>
+
+    <script>
+        class KaminaOS {
+            constructor() {
+                this.startTime = new Date();
+                this.init();
+            }
+            
+            init() {
+                console.log("🌟 KAMINA-OS Principal Initialisé");
+                this.startLiveConsole();
+                this.updateStatus();
+                this.initializeModules();
+            }
+            
+            startLiveConsole() {
+                let lineCount = 6;
+                const consoleElement = document.getElementById('console');
+                
+                setInterval(() => {
+                    if (lineCount < 15) {
+                        const messages = [
+                            "> Surveillance système: ACTIVE",
+                            "> Mémoire: OPTIMISÉE", 
+                            "> Processus: STABLE",
+                            "> Sécurité: MAXIMALE",
+                            "> Performance: OPTIMALE",
+                            "> Uptime: " + Math.floor((new Date() - this.startTime)/1000) + "s"
+                        ];
+                        
+                        if (lineCount < messages.length + 6) {
+                            consoleElement.innerHTML += `<div>${messages[lineCount - 6]}</div>`;
+                            consoleElement.scrollTop = consoleElement.scrollHeight;
+                            lineCount++;
+                        }
+                    }
+                }, 2000);
+            }
+            
+            updateStatus() {
+                const statusElement = document.getElementById('liveStatus');
+                setTimeout(() => {
+                    statusElement.innerHTML = "🟢 SYSTÈME KAMINA-OS LIVE ET OPÉRATIONNEL";
+                    statusElement.style.background = "linear-gradient(45deg, #00b09b, #96c93d)";
+                }, 3000);
+            }
+            
+            initializeModules() {
+                console.log("📦 Modules KAMINA-OS chargés: Système Autonome, Communication, IA");
+            }
+        }
+        
+        // Démarrer KAMINA-OS
+        new KaminaOS();
+    </script>
+</body>
+</html>
