@@ -1,0 +1,38 @@
+📊 RAPPORT ARCHITECTURE KAMINA-OS-WALK
+======================================
+
+📁 STRUCTURE COMPLÈTE :
+.
+./.git
+./android-deploy
+./android-deploy/kamina-apk
+./android-deploy/kamina-apk/app
+./android-deploy/kamina-apk/app/src
+./android-deploy/kamina-apk/app/src/main
+./android-deploy/kamina-apk/app/src/main/assets
+./android-deploy/kamina-apk/app/src/main/java
+./android-deploy/kamina-apk/app/src/main/java/com
+./android-deploy/kamina-apk/app/src/main/java/com/kaminaos
+./android-deploy/kamina-apk/app/src/main/java/com/kaminaos/app
+./android-deploy/kamina-apk/app/src/main/res
+./android-deploy/kamina-apk/app/src/main/res/layout
+./docs
+./feedback-system
+./scripts
+./src
+./src/analytics
+./src/automation
+./src/core
+./src/modules
+./src/strategies
+./src/utils
+./tests
+./web-deploy
+
+📄 FICHIERS PAR TYPE :
+HTML: 15
+JS:   15
+CSS:  1
+JSON: 4
+MD:   12
+SH:   7
