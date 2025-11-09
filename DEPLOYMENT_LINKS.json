@@ -1,0 +1,13 @@
+{
+  "web": "https://kamina-os.netlify.app",
+  "github": "https://github.com/elganyaanis-dev/Kamina-OS-Walk",
+  "github_repo": "https://github.com/elganyaanis-dev/Kamina-OS-Walk---Strat-gie-D-ploiement-Mondial",
+  "documentation": "https://github.com/elganyaanis-dev/Kamina-OS-Walk#readme",
+  "apk_download": "https://drive.google.com/file/d/.../view?usp=sharing",
+  "developer": "Chabbi Mohammed Anis",
+  "status": "ACTIVE",
+  "version": "2.0.0",
+  "deployment_date": "2025-11-09",
+  "cost": "0€",
+  "platforms": ["web", "android", "github", "termux"]
+}
